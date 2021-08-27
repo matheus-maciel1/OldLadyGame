@@ -1,0 +1,14 @@
+{
+  "name": "OldLadyGame",
+  "dependencies": {
+    "framework7": "v6.3.1",
+    "framework7-icons": "v5.0.3",
+    "Font-Awesome": "5.15.4",
+    "bootstrap": "v5.1.0"
+  },
+  "resolutions": {
+    "bootstrap": "v5.1.0",
+    "framework7": "v6.3.1",
+    "tether": "v2.0.0"
+  }
+}
