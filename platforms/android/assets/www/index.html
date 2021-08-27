@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>OldLadyGame</title>
+    <link rel="icon" type="imagem/png" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bower_components/framework7/dist/css/framework7.material.min.css">
+    <link rel="stylesheet" href="../bower_components/framework7/dist/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="../bower_components/framework7-icons/css/framework7-icons.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../bower_components/framework7/dist/js/framework7.min.js"></script>
+    <script type="text/javascript" src="../bower_components/framework7/kitchen-sink/core/js/app.js"></script>
+    <icon src="image/ico.ico" />
+    <style>
+        input {
+            color: white;
+            background-color: white;
+            height: 8vh;
+            width: 15vw;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url(images/vazio.png);
+        }
+
+        #reset {
+            color: inherit;
+            background-color: inherit;
+            height: auto;
+            width: auto;
+            background-position: inherit;
+            background-repeat: inherit;
+            background-size: inherit;
+            background-image: inherit;
+        }
+
+        img {
+            justify-content: center;
+            align-items: center;
+            width: 70vh;
+            height: 22vh;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let scoreX = 0;
+            let scoreO = 0;
+            let XO = '_';
+            let winner = '_';
+
+            const houses = document.getElementsByTagName('input');
+            const btn_reset = document.getElementById('reset');
+            const which_label = document.getElementById('vez');
+            const label_X = document.getElementById('scoreX');
+            const label_O = document.getElementById('scoreO');
+            const logo = document.getElementById('logo');
+            let changePlayer = function () {
+                if (XO == 'X') {
+                    XO = 'O';
+                    which_label.innerText = 'O';
+                    which_label.style.color = 'red';
+
+                } else {
+                    XO = 'X';
+                    which_label.innerText = 'X';
+                    which_label.style.color = 'black';
+                }
+            }
+
+            let winning = function () {
+                if ((houses[0].value == houses[1].value) && (houses[1].value == houses[2].value) && houses[0].value != '_') {
+                    houses[0].style.backgroundColor = '#0F0';
+                    houses[1].style.backgroundColor = '#0F0';
+                    houses[2].style.backgroundColor = '#0F0';
+                    houses[0].style.color = '#0F0';
+                    houses[1].style.color = '#0F0';
+                    houses[2].style.color = '#0F0';
+
+                    return houses[0].value;
+
+                } else if ((houses[3].value == houses[4].value) && (houses[4].value == houses[5].value) && houses[3].value != '_') {
+                    houses[3].style.backgroundColor = '#0F0';
+                    houses[4].style.backgroundColor = '#0F0';
+                    houses[5].style.backgroundColor = '#0F0';
+                    houses[3].style.color = '#0F0';
+                    houses[4].style.color = '#0F0';
+                    houses[5].style.color = '#0F0';
+
+                    return houses[3].value;
+
+                } else if ((houses[6].value == houses[7].value) && (houses[7].value == houses[8].value) && houses[6].value != '_') {
+                    houses[6].style.backgroundColor = '#0F0';
+                    houses[7].style.backgroundColor = '#0F0';
+                    houses[8].style.backgroundColor = '#0F0';
+                    houses[6].style.color = '#0F0';
+                    houses[7].style.color = '#0F0';
+                    houses[8].style.color = '#0F0';
+
+                    return houses[6].value;
+
+                } else if ((houses[0].value == houses[3].value) && (houses[3].value == houses[6].value) && houses[0].value != '_') {
+                    houses[0].style.backgroundColor = '#0F0';
+                    houses[3].style.backgroundColor = '#0F0';
+                    houses[6].style.backgroundColor = '#0F0';
+                    houses[0].style.color = '#0F0';
+                    houses[3].style.color = '#0F0';
+                    houses[6].style.color = '#0F0';
+
+                    return houses[0].value;
+
+                } else if ((houses[1].value == houses[4].value) && (houses[4].value == houses[7].value) && houses[1].value != '_') {
+                    houses[1].style.backgroundColor = '#0F0';
+                    houses[4].style.backgroundColor = '#0F0';
+                    houses[7].style.backgroundColor = '#0F0';
+                    houses[1].style.color = '#0F0';
+                    houses[4].style.color = '#0F0';
+                    houses[7].style.color = '#0F0';
+
+                    return houses[1].value;
+
+                } else if ((houses[2].value == houses[5].value) && (houses[5].value == houses[8].value) && houses[2].value != '_') {
+                    houses[2].style.backgroundColor = '#0F0';
+                    houses[5].style.backgroundColor = '#0F0';
+                    houses[8].style.backgroundColor = '#0F0';
+                    houses[2].style.color = '#0F0';
+                    houses[5].style.color = '#0F0';
+                    houses[8].style.color = '#0F0';
+
+                    return houses[2].value;
+                } else if ((houses[0].value == houses[4].value) && (houses[4].value == houses[8].value) && houses[0].value != '_') {
+                    houses[0].style.backgroundColor = '#0F0';
+                    houses[4].style.backgroundColor = '#0F0';
+                    houses[8].style.backgroundColor = '#0F0';
+                    houses[0].style.color = '#0F0';
+                    houses[4].style.color = '#0F0';
+                    houses[8].style.color = '#0F0';
+
+                    return houses[0].value;
+
+                } else if ((houses[2].value == houses[4].value) && (houses[4].value == houses[6].value) && houses[2].value != '_') {
+                    houses[2].style.backgroundColor = '#0F0';
+                    houses[4].style.backgroundColor = '#0F0';
+                    houses[6].style.backgroundColor = '#0F0';
+                    houses[2].style.color = '#0F0';
+                    houses[4].style.color = '#0F0';
+                    houses[6].style.color = '#0F0';
+
+                    return houses[2].value;
+                }
+
+                return '_';
+            }
+
+            for (var i = 0; i < 9; i++) {
+                houses[i].addEventListener('click', (event) => {
+                    if ((event.target.value == '_') && (winner == '_')) {
+                        event.target.value = XO;
+                        if (XO === 'X') {
+
+                            event.target.style.backgroundImage = "url('/images/64x.png')";
+                        } else {
+                            event.target.style.backgroundImage = "url('/images/64.png')";
+                        }
+                        changePlayer();
+                        winner = winning();
+
+                        if (winner != '_') {
+                            if (winner == 'X') {
+                                scoreX++;
+                                label_X.innerText = `${scoreX}`;
+                                which_label.style.color = 'black';
+                                which_label.innerText = '';
+                            } else {
+                                scoreO++;
+                                label_O.innerText = `${scoreO}`;
+                                which_label.style.color = 'red';
+                                which_label.innerText = '';
+                            }
+                            which_label.innerText = `${winner} venceu!`;
+
+                        }
+                    }
+                });
+            }
+
+            btn_reset.addEventListener('click', (event) => {
+                for (var i = 0; i < 9; i++) {
+                    houses[i].value = '_';
+                    houses[i].style.backgroundColor = 'white';
+                    houses[i].style.color = 'white';
+                    houses[i].style.backgroundImage = 'url("/images/vazio.png")';
+                }
+
+                winner = '_';
+
+                randomizer();
+            });
+
+            let randomizer = function () {
+                if (Math.floor(Math.random() * 2) == 0) {
+                    XO = "O";
+                    which_label.innerText = "O";
+                    which_label.style.color = '#F00';
+                } else {
+                    XO = "X";
+                    which_label.innerText = "X";
+                    which_label.style.color = '#00F';
+                }
+            }
+            randomizer();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <img src="images/logo.png"/>
+        </div>
+        <div class="row">
+            <p>Player X:</p><p id="scoreX">0</p>
+            <p>Player O:</p><p id="scoreO">0</p>
+        </div>
+    </div>
+    <div class="container" style="display:grid;justify-content:space-around;">
+        <div class="row" style="align-items:center;padding:1vh;">
+            <div class="col-md-4">
+                <input type="button" value="_">
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="_">
+
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="_">
+            </div>
+        </div>
+        <div class="row" style="align-items:center;padding:1vh;">
+            <div class="col-md-4">
+                <input type="button" value="_">
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="_">
+
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="_">
+            </div>
+        </div>
+        <div class="row" style="align-items:center;padding:1vh;">
+            <div class="col-md-4">
+                <input type="button" value="_">
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="_">
+            </div>
+            <div class="col-md-4">
+                <input type="button" value="_">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <input type="button" value="RESET" id="reset"/>
+        </div>
+        <div class="row">
+            <h4>VEZ DE JOGADOR: <span id="vez"></span></h4>
+        </div>
+    </div>
+</body>
+</html>
